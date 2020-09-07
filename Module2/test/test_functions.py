@@ -2,9 +2,9 @@ import unittest
 from main import camper_age_input
 
 
-class FunctionTestCase(unittest.TestCase):
+class MyTestCase(unittest.TestCase):
     def test_something(self):
-        self.assertEqual(False, True)
+        self.assertEqual(True, False)
 
 
 if __name__ == '__main__':
