@@ -1,5 +1,4 @@
 import unittest
-from main import camper_age_input
 
 
 class MyTestCase(unittest.TestCase):
