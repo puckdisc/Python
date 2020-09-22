@@ -14,6 +14,8 @@ class MyTestCase(unittest.TestCase):
         with self.assertRaises(ValueError):
             validation_with_try.average(90, -89, 78)
 
+        with self.assertRaises(ValueError):
+            validation_with_try.average(90, 89, -78)
 
 
 if __name__ == '__main__':
