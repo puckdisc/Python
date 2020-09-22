@@ -1,3 +1,8 @@
+# Sean Gilbert
+# CIS 189 Fall 2020
+# Function calculate_order calculates order total based on inputs
+
+
 def calculate_order(price, cash_coupon, percent_coupon):
     tax = 0.06
     subtotal = (price - cash_coupon)*(1-percent_coupon)
@@ -14,10 +19,9 @@ def calculate_order(price, cash_coupon, percent_coupon):
     elif 50 <= price:
         shipping = 0
 
-
     return subtotal*(1+tax)+shipping
 
 
 if __name__ == '__main__':
 
-    calculate_price()
+    calculate_order()
