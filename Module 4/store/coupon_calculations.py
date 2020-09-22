@@ -4,6 +4,7 @@ def calculate_order(price, cash_coupon, percent_coupon):
 
     if subtotal < 0:
         subtotal  = 0
+
     if 0 <= price < 10:
         shipping = 5.95
     elif 10 <= price < 30:
