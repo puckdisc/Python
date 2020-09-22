@@ -3,14 +3,16 @@
 # Last Modified 09/21/20
 
 
-
 def average(score1, score2, score3):
     NUMBER_TESTS = 3
 
-    if score3 < 0:
+    try:
+        negative_test = score1*score2*score3
+    finally:
+        if negative_test >= 0:
+            return float((score1 + score2 + score3)/NUMBER_TESTS)
+        elif negative_test < 0:
             raise ValueError
-
-    return float((score1 + score2 + score3)/NUMBER_TESTS)
 
 
 if __name__ == '__main__':
