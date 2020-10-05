@@ -3,13 +3,10 @@ from more_fuctions import string_functions
 
 
 class MyTestCase(unittest.TestCase):
-    """verify expected string product return"""
     def test_multiple_strings(self):
-        """test parameters"""
         message = 'abc'
-        n = 2
-
-        self.assertEqual('abcabc', string_functions.multiply_string(message, n))
+        self.assertEqual('abc', string_functions.multiply_string(message, 1))
+        self.assertEqual('abcabcabcabc', string_functions.multiply_string(message, 4))
 
 
 if __name__ == '__main__':
