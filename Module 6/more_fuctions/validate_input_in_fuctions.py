@@ -10,10 +10,6 @@ def score_input(test_name, test_score=0, invalid_message='Invalid test score, tr
     :return: pass
     """
     while True:
-        test_name = test_name.strip()
-        if test_name == '':
-            return False
-
         if 0 <= test_score <= 100:
             print(test_name, test_score)
             # return {test_name: test_score}
@@ -22,5 +18,18 @@ def score_input(test_name, test_score=0, invalid_message='Invalid test score, tr
             print(invalid_message)
             return False
 
+
 if __name__ == '__main__':
-    score_input('')
+
+    test_name = input('Enter test name: ')
+    test_score = input('Enter test score: ')
+    try:
+        test_score = int(test_score)
+        score_input(test_name, test_score)
+
+    except ValueError:
+        print('Score must be an integer. Try again')
+
+
+
+
