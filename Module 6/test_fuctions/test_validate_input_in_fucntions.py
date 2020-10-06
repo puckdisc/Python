@@ -14,10 +14,11 @@ class MyTestCase(unittest.TestCase):
 
     def test_score_input_test_score_above_range(self):
         self.assertEqual(False, validate_input_in_fuctions.score_input('abc', 105))
-"""
-    def test_score_input_test_score_non_numeric(self):
-        self.assertEqual(False, validate_input_in_fuctions.score_input('abc', 'abc'))
 
+    def test_score_input_test_score_non_numeric(self):
+        with self.assertRaises(TypeError):
+            validate_input_in_fuctions.score_input('abc', 'abc')
+"""
     def test_score_input_invalid_message(self):
         self.assertEqual(True, validate_input_in_fuctions.score_input('abc',500), 'passed into argument')
 """
