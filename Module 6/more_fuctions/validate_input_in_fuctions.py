@@ -14,13 +14,6 @@ def score_input(test_name, test_score=0, invalid_message='Invalid test score, tr
         if test_name == '':
             return False
 
-        if 0 <= test_score <= 100:
-            print(test_name, test_score)
-            # return {test_name: test_score}
-            return True
-        else:
-            print(invalid_message)
-            return False
 
 
 if __name__ == '__main__':
