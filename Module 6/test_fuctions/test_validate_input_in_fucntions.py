@@ -8,13 +8,13 @@ class MyTestCase(unittest.TestCase):
 
     def test_score_input_test_score_valid(self):
         self.assertEqual(True, validate_input_in_fuctions.score_input('abc', 50))
-"""
+
     def test_score_input_test_score_below_range(self):
         self.assertEqual(False, validate_input_in_fuctions.score_input('abc', -10))
 
     def test_score_input_test_score_above_range(self):
         self.assertEqual(False, validate_input_in_fuctions.score_input('abc', 105))
-
+"""
     def test_score_input_test_score_non_numeric(self):
         self.assertEqual(False, validate_input_in_fuctions.score_input('abc', 'abc'))
 
