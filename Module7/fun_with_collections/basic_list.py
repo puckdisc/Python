@@ -1,4 +1,10 @@
 def make_list():
+    """
+    calls get_input(), appends return to list,
+    converts appendage to integer, returns integer list
+
+    :return: integer list
+    """
     fun_list = []
 
     try:
@@ -15,6 +21,11 @@ def make_list():
 
 
 def get_input():
+    """
+    returns a user-defined string
+
+    :return: string
+    """
     user_input = input('Enter an integer: ')
     return user_input
 
