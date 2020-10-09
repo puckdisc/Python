@@ -11,17 +11,12 @@ def sort_list():
     return fun_list
 
 
-
-
-
-
-
 def search_list():
     """
 
     :return:
     """
-    pass
+    return 1
 
 
 
