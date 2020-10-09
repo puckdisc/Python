@@ -6,9 +6,9 @@ def sort_list():
     :return:
     """
 
-    return [9,11,45]
-
-
+    fun_list = basic_list_exception.make_list()
+    fun_list.sort()
+    return fun_list
 
 
 
@@ -27,4 +27,4 @@ def search_list():
 
 
 if __name__ == '__main__':
-    basic_list_exception.make_list()
+    sort_list()
