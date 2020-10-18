@@ -1,8 +1,8 @@
 def in_dict(fun_dict, search):
     try:
         return search in fun_dict
-    except:
-        return False
+    except Exception:
+        raise
 
 
 
