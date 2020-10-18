@@ -57,6 +57,7 @@ def average_scores(scores_dict):
         score_sum = score_sum + score_value
     avg = score_sum/len(scores_dict)
 
+    print(avg)
     return avg
 
 
