@@ -1,5 +1,14 @@
 def switch_average(letter):
-    min = {
+    """
+    Accepts letter and returns minimum score
+
+    Accepts str letter key and uses .get() to search dictionary for key
+
+    :param letter: string input key
+    :return: integer value
+    """
+
+    min_score = {
         'A': 90,
         'B': 80,
         'C': 70,
@@ -7,9 +16,10 @@ def switch_average(letter):
         'F': 0
     }
 
-    switch = min.get(letter, lambda: "Invalid Entry. ")
+    switch = min_score.get(letter, lambda: 'Invalid Entry')
     return switch
 
+
 if __name__ == '__main__':
-    switch_average('A')
+    switch_average('H')
 

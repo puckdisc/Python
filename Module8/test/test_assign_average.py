@@ -19,7 +19,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(0, assign_average.switch_average('F'))
 
     def test_assign_average_Z(self):
-        self.assertEqual('Invalid Entry. ', assign_average.switch_average('Z'))
+        self.assertEqual("Invalid Entry", assign_average.switch_average('S'))
 
 
 
