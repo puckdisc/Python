@@ -1,6 +1,11 @@
 def switch_average(letter):
-    pass
+    min = {
+        'A': 90,
+    }
 
+    switch = min.get(letter, lambda: "Invalid Entry. ")
+    return switch
 
 if __name__ == '__main__':
-    pass
+    switch_average('A')
+
