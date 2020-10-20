@@ -4,6 +4,7 @@ def switch_average(letter):
         'B': 80
         'C': 70
         'D': 60
+        'F': 0
     }
 
     switch = min.get(letter, lambda: "Invalid Entry. ")
