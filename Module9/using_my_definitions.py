@@ -1,5 +1,6 @@
 import my_definitions as md
 
+# imports and uses module
 
 if __name__ == '__main__':
     hockey_dict = {
@@ -17,6 +18,6 @@ if __name__ == '__main__':
     )
 
     md.greeting()
-    md.author()
+    md.author('Bob')
     md.print_dict(hockey_dict)
     md.print_set(hockey_set)
