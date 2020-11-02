@@ -10,10 +10,15 @@ class Student:
         self.gpa = gpa
 
     def __str__(self):
+        return "Student: %s, %s, %s, %s" % (self.last_name, self.first_name, self.major, self.gpa)
+
+    def __repr__(self):
+        return "Student: lname=%s, fname=%s, major=%s, gpa=%s" % (self.last_name, self.first_name, self.major, self.gpa)
+
+    def display(self):
         return self.first_name + ' ' + self.last_name + " is majoring in " + self.major +\
                                      " with GPA: " + str(self.gpa)
 
-
 # Driver
 student = Student('Ovechkin', 'Alex', 'Goal Scoring', 4.0)
-print(student)
+print(str(student))

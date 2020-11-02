@@ -19,5 +19,8 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(self.student.major, 'Goal Scoring')
         self.assertEqual(self.student.gpa, 4.0)
 
+    def test_student_str(self):
+        self.assertEqual(str(self.student), 'Student: Ovechkin, Alex, Goal Scoring, 4.0')
+
 if __name__ == '__main__':
     unittest.main()
