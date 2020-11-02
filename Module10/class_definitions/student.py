@@ -2,7 +2,7 @@ class Student:
     """Student class"""
     def __init__(self, lname, fname, major, gpa=0.0):
         name_characters = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'-")
-        if not name_characters.issuperset(lname) and name_characters.issuperset(fname):
+        if not name_characters.issuperset(lname) or not name_characters.issuperset(fname):
             raise ValueError
         self.last_name = lname
         self.first_name = fname
@@ -21,4 +21,4 @@ class Student:
 
 # Driver
 student = Student('Ovechkin', 'Alex', 'Goal Scoring', 4.0)
-print(str(student))
+print(repr(student))
