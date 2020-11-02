@@ -3,14 +3,14 @@ class Student:
     def __init__(self, lname, fname, major, gpa=0.0):
         name_characters = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'- ")
         if not name_characters.issuperset(lname) or not name_characters.issuperset(fname) \
-                or not name_characters.issuperset(major):
+                or not name_characters.issuperset(major):  # check appropriate chars
             raise ValueError
         self.last_name = lname
         self.first_name = fname
         self.major = major
-        if not isinstance(gpa, float):
+        if not isinstance(gpa, float):  # check gpa is float
             raise ValueError
-        if gpa < 0 or gpa > 4:
+        if gpa < 0 or gpa > 4:  # check gpa in range
             raise ValueError('gpa out of range')
         self.gpa = gpa
 

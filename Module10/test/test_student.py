@@ -1,6 +1,7 @@
 import unittest
 from class_definitions import student as student1
 
+
 class MyTestCase(unittest.TestCase):
     def setUp(self):
         self.student = student1.Student('Ovechkin', 'Alex', 'Goal Scoring', 4.0)
@@ -24,21 +25,21 @@ class MyTestCase(unittest.TestCase):
 
     def test_object_not_created_error_last_name(self):
         with self.assertRaises(ValueError):
-            test_student = student1.Student('Ovechk7n', 'Alex', 'Goal Scoring', 4.0)
-            del test_student
+            student1.Student('Ovechk7n', 'Alex', 'Goal Scoring', 4.0)
 
     def test_object_not_created_error_first_name(self):
         with self.assertRaises(ValueError):
-            test_student = student1.Student('Ovechkin', 'Al3x', 'Goal Scoring', 4.0)
+            student1.Student('Ovechkin', 'Al3x', 'Goal Scoring', 4.0)
 
     def test_object_not_created_error_major(self):
         with self.assertRaises(ValueError):
-            test_student = student1.Student('Ovechkin', 'Alex', 'G0al Scor1ng', 4.0)
+            student1.Student('Ovechkin', 'Alex', 'G0al Scor1ng', 4.0)
 
     def test_object_not_created_error_gpa(self):
         with self.assertRaises(ValueError):
-            test_student = student1.Student('Ovechkin', 'Alex', 'Goal Scoring', 'Alex')
-            test_student = student1.Student('Ovechkin', 'Alex', 'Goal Scoring', 5.6)
+            student1.Student('Ovechkin', 'Alex', 'Goal Scoring', 'Alex')
+            student1.Student('Ovechkin', 'Alex', 'Goal Scoring', 5.6)
+
 
 if __name__ == '__main__':
     unittest.main()
