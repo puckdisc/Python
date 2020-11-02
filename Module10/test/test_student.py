@@ -12,7 +12,6 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(self.student.first_name, 'Alex')
         self.assertEqual(self.student.last_name, 'Ovechkin')
         self.assertEqual(self.student.major, 'Goal Scoring')
-        self.assertEqual(self.student.gpa, 4.0)
 
 if __name__ == '__main__':
     unittest.main()
