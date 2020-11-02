@@ -8,6 +8,8 @@ class Student:
         self.last_name = lname
         self.first_name = fname
         self.major = major
+        if not isinstance(gpa, float):
+            raise ValueError
         self.gpa = gpa
 
     def __str__(self):
