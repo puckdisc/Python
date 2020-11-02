@@ -10,6 +10,8 @@ class Student:
         self.major = major
         if not isinstance(gpa, float):
             raise ValueError
+        if gpa < 0 or gpa > 4:
+            raise ValueError('gpa out of range')
         self.gpa = gpa
 
     def __str__(self):
