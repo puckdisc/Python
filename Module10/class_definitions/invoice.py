@@ -57,4 +57,5 @@ class Invoice:
 invoice = Invoice(1, 123, 'Mouse', 'Minnie', '555-867-5309', '1313 Disneyland Dr, Anaheim, CA 92802')
 invoice.add_item({'iPad': 799.99})
 invoice.add_item({'Surface': 999.99})
-invoice.create_invoice()
+#invoice.create_invoice()
+print(invoice)
