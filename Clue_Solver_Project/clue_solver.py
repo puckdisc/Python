@@ -1,3 +1,4 @@
+import tkinter as tk
 from itertools import islice, cycle, repeat
 
 
