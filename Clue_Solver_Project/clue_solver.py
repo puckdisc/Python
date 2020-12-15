@@ -2,9 +2,9 @@ import tkinter as tk
 from itertools import islice, cycle, repeat
 
 
-class Player:
+class Player:  # player class
     def __init__(self):
-        self.hand = {  # initialize player hand, 0=default/unknown, 1=not in hand, 2=maybe in hand, 3=confirmed in hand
+        self.hand = {  # initialize player hand, 0=default/unknown, 1=maybe in hand, 2-8=maybe counter, 9=confirmed in hand
             'Colonel Mustard': 0,
             'Mr. Green': 0,
             'Mrs. Peacock': 0,
@@ -27,26 +27,30 @@ class Player:
             'Lounge': 0,
             'Study': 0
         }
-        self.not_in_hand = None
-        self.might_have = None
 
-    def update_in_hand(self, pocket):
+    def __repr__(self):
+        return "Player class object\nself.hand={:}".format(self.hand)
+
+    def __str__(self):
+        return "{:}".format(self.hand)
+
+    def update_in_hand(self, pocket):  # take pocket and set matching keys to 8
         for x in pocket:
             if x in self.hand:
                 self.hand[x] = 8
 
-    def update_not_in_hand(self, pocket):
+    def update_not_in_hand(self, pocket):  # take pocket and set matching keys to 9
         for x in pocket:
             if x in self.hand:
                 self.hand[x] = 9
 
-    def update_maybe_in_hand(self, pocket):
+    def update_maybe_in_hand(self, pocket):  # take pocket and add 1 to matching key
         for x in pocket:
             if x in self.hand:
                 self.hand[x] += 1
 
 
-class ClueGUI(tk.Frame):
+class ClueGUI(tk.Frame):  # GUI class based on tkinter
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
@@ -112,7 +116,10 @@ class ClueGUI(tk.Frame):
         self.enter_known_dropdown_label = None
         self.enter_known_button = None
 
-    def start_game(self):
+    def __repr__(self):
+        return "ClueGUI object instance"
+
+    def start_game(self):  # set up GUI for use after accepting number of players
         for x in range(0, self.num_players_int.get()):  # initialize player instances
             if x == 0:
                 temp = "You"
@@ -126,7 +133,7 @@ class ClueGUI(tk.Frame):
         self.draw_player_hand_labels()
 
         r = 2
-        for key in self.deck.keys():  # create selection buttons
+        for key in self.deck.keys():  # create card selection buttons based on card deck
             temp = "{:}".format(key)
             self.selection_buttons[temp] = tk.Button(self.parent, text="{:}".format(key), width=self.w,
                                                      command=lambda t=temp: self.press_button(t))
@@ -185,7 +192,7 @@ class ClueGUI(tk.Frame):
         self.pocket.clear()
         self.reset_for_guess()
 
-    def reset_for_guess(self):
+    def reset_for_guess(self):  # method for resetting buttons/menus after data entry action
         self.enter_button.config(state="disabled")
         self.guesser_dropdown.config(state="normal")
         self.guess_button.config(state="normal")
@@ -198,11 +205,11 @@ class ClueGUI(tk.Frame):
         self.draw_player_hand_labels()
         self.pocket.clear()
 
-    def draw_player_hand_labels(self):
+    def draw_player_hand_labels(self):  # method to redraw player hand labels after class updates
         c = 3
-        for x in self.players.values():
+        for x in self.players.values():  # for x in players
             r = 2
-            for y, z in x.hand.items():
+            for y, z in x.hand.items():  # for key, value in player hand dictionaries
                 if z == 0:
                     label = tk.Label(self.parent, text="?", borderwidth=2, relief="solid", width=self.w)
                     label.grid(row=r, column=c)
@@ -221,7 +228,7 @@ class ClueGUI(tk.Frame):
                 r += 1
             c += 1
 
-    def press_button(self, card):
+    def press_button(self, card):  # actions when a card button is pressed
         self.selection_buttons[card].config(relief="sunken")  # 'press' button
         self.add_to_pocket(card)  # pass into pocket
 
@@ -231,12 +238,12 @@ class ClueGUI(tk.Frame):
         else:
             self.pocket.append(str(card))
 
-    def reset_selection_buttons(self):
+    def reset_selection_buttons(self):  # reset card selection buttons
         self.pocket.clear()
         for x in self.selection_buttons.values():
             x.config(relief="raised")
 
-    def guess(self, guesser, stop):
+    def guess(self, guesser, stop):  # method for recording the result of guesses and updating instances/GUI
         start = 0
         for x in self.players.keys():
             if x == guesser:
@@ -260,7 +267,7 @@ class ClueGUI(tk.Frame):
         self.draw_player_hand_labels()
         self.reset_for_guess()
 
-    def enter_known_card(self, player):
+    def enter_known_card(self, player):  # method for when someone shows the user a card after a guess
 
         for x in self.players:
             if x == player:
