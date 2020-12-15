@@ -47,7 +47,10 @@ class Player:  # player class
     def update_maybe_in_hand(self, pocket):  # take pocket and add 1 to matching key
         for x in pocket:
             if x in self.hand:
-                self.hand[x] += 1
+                if self.hand[x] >= 7:
+                    pass
+                else:
+                    self.hand[x] += 1
 
 
 class ClueGUI(tk.Frame):  # GUI class based on tkinter
