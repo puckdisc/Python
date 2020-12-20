@@ -24,8 +24,7 @@ for a in draft_rows:  # draft rows is a list of wpi.DraftBoardCell
     for b in DraftBoardCell:
         Player = b['player']
         proPlayer = Player['proPlayer']
-        id = proPlayer['id']
-        print(id, pick)  # print (ff player_id, #overall)
+        id = proPlayer['id']  # print (ff player_id, #overall)
         pick += 1
 
 
