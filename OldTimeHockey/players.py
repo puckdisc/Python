@@ -1,4 +1,5 @@
 import requests
+import time
 
 def get_roster(team_id):
     params = {}
@@ -47,5 +48,10 @@ def get_roster(team_id):
 
 
 if __name__ == "__main__":
-    get_roster(63182)
+    start = time.time()
+    print(get_roster(63182))
+
+    end = time.time()
+    dur = end - start
+    print("{:.2f} seconds".format(dur))
 
