@@ -22,15 +22,7 @@ if __name__ == "__main__":
 
 
 
-
-
-
-
-
-
-
-
     end = time.time()
     dur = end - start
     print("{:.2f} seconds".format(dur))
-    print(OTH_team_ids)
+    print(len(OTH_team_ids))
