@@ -13,8 +13,7 @@ if __name__ == "__main__":
 
 
     leagues = []
-    for x in range(12086, 12087):  # first and last league num for OTH 2019
-    # for x in range(12086, 12102):  # first and last league num for OTH 2019
+    for x in range(12086, 12102):  # first and last league num for OTH 2019
         leagues.append(x)
 
     OTH_team_ids = {}
@@ -22,14 +21,19 @@ if __name__ == "__main__":
         OTH_team_ids[league] = get_team_ids(league)
 
 
-    end = time.time()
-    dur = end - start
+    lap1 = time.time()
+    dur = lap1 - start
     print("Have team ids. {:.2f} seconds".format(dur))
 
     temp_all_rosters = {}
     for league in OTH_team_ids.keys():
         for team in OTH_team_ids[league]:
+            lap1 = time.time()
             temp_all_rosters[team] = get_roster(league, team)
+            lap2 = time.time()
+            dur = lap2 - lap1
+            print("Got roster for {:} in {:.2f} sec".format(team, dur))
+
 
     for team in temp_all_rosters:
         a = temp_all_rosters[team]
@@ -42,5 +46,5 @@ if __name__ == "__main__":
     f.close()
     end = time.time()
     dur = end - start
-    print("{:.2f} seconds".format(dur))
+    print("Total Elapsed Time: {:.2f} seconds".format(dur))
     # print(OTH_team_ids)
