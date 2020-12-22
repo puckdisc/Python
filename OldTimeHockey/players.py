@@ -1,7 +1,7 @@
 import requests
 import time
 
-def get_roster(team_id):
+def get_roster(league_id, team_id):
     """
 
     :param team_id: team_id
@@ -12,7 +12,7 @@ def get_roster(team_id):
 
     params = {}
     params['sport'] = 'NHL'
-    params['league_id'] = 12093
+    params['league_id'] = league_id
     params['team_id'] = team_id
     params['season'] = 2019
 
@@ -21,7 +21,6 @@ def get_roster(team_id):
     r = requests.get(url, params)  #Fetch LeaguePlayerListing
 
     r_json = r.json()  # json
-    print(r_json)
     RosterGroup = r_json['groups']  # ws.flea.api.RosterGroup, 3 dicts, 0:starting 1:bench 2:injured
 
     Starting_Slots = RosterGroup[0]
@@ -38,8 +37,11 @@ def get_roster(team_id):
 
     for z in position_slots:
         for a in z:
-            Player = a['leaguePlayer']
-            Player = Player['proPlayer']  # digging into nested items to produce {id : name}
+            try:
+                Player = a['leaguePlayer']
+            except KeyError:
+                continue
+            Player = Player['proPlayer']  # digging into nested dicts
             temp_player_dict[Player['id']] = Player['nameFull']  # produces duplicate entries
 
     for key, value in temp_player_dict.items():  # getting rid of duplicates
@@ -54,7 +56,7 @@ def get_roster(team_id):
 
 if __name__ == "__main__":
     start = time.time()
-    print(get_roster(62748))
+    print(get_roster(12086, 62748))
 
     end = time.time()
     dur = end - start
