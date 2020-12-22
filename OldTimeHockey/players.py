@@ -27,12 +27,10 @@ def get_roster(league_id, team_id):
     Starting_Slots = Starting_Slots['slots']
     Bench_Slots = RosterGroup[1]
     Bench_Slots = Bench_Slots['slots']
-    position_slots = [Starting_Slots, Bench_Slots]
 
     try:  # teams w/o IR players do not have an injured roster group
         Injured_Slots = RosterGroup[2]
         Injured_Slots = Injured_Slots['slots']
-        position_slots.append(Injured_Slots)
         position_slots = [Starting_Slots, Bench_Slots, Injured_Slots]
     except IndexError:
         position_slots = [Starting_Slots, Bench_Slots]
