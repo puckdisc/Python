@@ -27,10 +27,15 @@ def get_roster(league_id, team_id):
     Starting_Slots = Starting_Slots['slots']
     Bench_Slots = RosterGroup[1]
     Bench_Slots = Bench_Slots['slots']
-    Injured_Slots = RosterGroup[2]
-    Injured_Slots = Injured_Slots['slots']
+    position_slots = [Starting_Slots, Bench_Slots]
 
-    position_slots = [Starting_Slots, Bench_Slots, Injured_Slots]
+    try:  # teams w/o IR players do not have an injured roster group
+        Injured_Slots = RosterGroup[2]
+        Injured_Slots = Injured_Slots['slots']
+        position_slots.append(Injured_Slots)
+        position_slots = [Starting_Slots, Bench_Slots, Injured_Slots]
+    except IndexError:
+        position_slots = [Starting_Slots, Bench_Slots]
 
     temp_player_dict = {}
     player_dict = {}
@@ -56,7 +61,7 @@ def get_roster(league_id, team_id):
 
 if __name__ == "__main__":
     start = time.time()
-    print(get_roster(12086, 62748))
+    print(get_roster(12086, 62757))
 
     end = time.time()
     dur = end - start
