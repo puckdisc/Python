@@ -1,5 +1,5 @@
 import draft
-import players
+from players import get_roster
 from league import get_team_ids
 import time
 
@@ -13,11 +13,18 @@ if __name__ == "__main__":
     for x in range(12086, 12102):  # first and last league num for OTH 2019
         leagues.append(x)
 
-    OTH_team_ids = []
+    OTH_team_ids = {}
     for a in leagues:
-        b = get_team_ids(a)
-        for c in b:
-            OTH_team_ids.append(c)
+        OTH_team_ids[a] = get_team_ids(a)
+
+    """
+    temp_all_rostered = {}
+    for a in OTH_team_ids:
+        print(a)
+        b = get_roster(a)
+        for key, value in b:
+            temp_all_rostered[key] = value
+    """
 
 
 
@@ -25,4 +32,4 @@ if __name__ == "__main__":
     end = time.time()
     dur = end - start
     print("{:.2f} seconds".format(dur))
-    print(len(OTH_team_ids))
+    print(OTH_team_ids)
