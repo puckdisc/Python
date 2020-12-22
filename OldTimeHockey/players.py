@@ -2,6 +2,14 @@ import requests
 import time
 
 def get_roster(team_id):
+    """
+
+    :param team_id: team_id
+    :return: {player_id:player_name]
+    """
+
+
+
     params = {}
     params['sport'] = 'NHL'
     params['league_id'] = 12093
@@ -13,7 +21,7 @@ def get_roster(team_id):
     r = requests.get(url, params)  #Fetch LeaguePlayerListing
 
     r_json = r.json()  # json
-
+    print(r_json)
     RosterGroup = r_json['groups']  # ws.flea.api.RosterGroup, 3 dicts, 0:starting 1:bench 2:injured
 
     Starting_Slots = RosterGroup[0]
@@ -23,10 +31,7 @@ def get_roster(team_id):
     Injured_Slots = RosterGroup[2]
     Injured_Slots = Injured_Slots['slots']
 
-    position_slots = []
-    position_slots.append(Starting_Slots)
-    position_slots.append(Bench_Slots)
-    position_slots.append(Injured_Slots)
+    position_slots = [Starting_Slots, Bench_Slots, Injured_Slots]
 
     temp_player_dict = {}
     player_dict = {}
@@ -49,7 +54,7 @@ def get_roster(team_id):
 
 if __name__ == "__main__":
     start = time.time()
-    print(get_roster(63182))
+    print(get_roster(62748))
 
     end = time.time()
     dur = end - start

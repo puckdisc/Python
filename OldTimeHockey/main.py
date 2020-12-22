@@ -17,6 +17,7 @@ if __name__ == "__main__":
     for a in leagues:
         OTH_team_ids[a] = get_team_ids(a)
 
+
     """
     temp_all_rostered = {}
     for a in OTH_team_ids:
