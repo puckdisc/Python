@@ -4,11 +4,9 @@ import time
 def get_roster(league_id, team_id):
     """
 
-    :param team_id: team_id
-    :return: {player_id:player_name]
+    :param: int league_id, int team_id
+    :return: [player_ids]
     """
-
-
 
     params = {}
     params['sport'] = 'NHL'
@@ -35,9 +33,21 @@ def get_roster(league_id, team_id):
     except IndexError:
         position_slots = [Starting_Slots, Bench_Slots]
 
+    roster = []
+    for group in position_slots:
+        for slot in group:
+            temp = slot['leaguePlayer']
+            temp = temp['proPlayer']
+            temp = temp['id']
+            roster.append(temp)
+
+    # print(roster)
+
+
+
+    """
     temp_player_dict = {}
     player_dict = {}
-
     for z in position_slots:
         for a in z:
             try:
@@ -50,11 +60,12 @@ def get_roster(league_id, team_id):
     for key, value in temp_player_dict.items():  # getting rid of duplicates
         if key not in player_dict.keys():
             player_dict[key] = value
+    """
 
     r.close()
     del r
-
-    return player_dict
+    return roster
+    #return player_dict
 
 
 if __name__ == "__main__":
