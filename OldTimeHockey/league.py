@@ -22,10 +22,12 @@ def get_team_ids(league):
 
     LeagueRoster = r_json['rosters']
 
-    team_ids = []
+    temp = []
+    team_ids = {}
     for a in LeagueRoster:
         b = a['team']
-        team_ids.append(b['id'])  # pull just team id, append to return list
+        temp.append(b['id'])  # pull just team id, append to return list
+    team_ids[league] = temp
 
     r.close()
     del r
