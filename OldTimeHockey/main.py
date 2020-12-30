@@ -1,4 +1,4 @@
-import draft
+
 from players import get_roster
 from league import get_team_ids
 import time
@@ -13,7 +13,8 @@ if __name__ == "__main__":
 
 
     leagues = []
-    for x in range(12086, 12102):  # first and last league num for OTH 2019
+    for x in range(12086, 12087):
+    #for x in range(12086, 12102):  # first and last league num for OTH 2019
         leagues.append(x)
 
     OTH_team_ids = {}
