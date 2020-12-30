@@ -1,4 +1,4 @@
-import requests
+from main import get_roster
 import time
 
 

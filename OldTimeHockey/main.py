@@ -123,14 +123,15 @@ if __name__ == "__main__":
     league_rosters = {}
     for league in leagues:
         team_list = get_team_ids(league)
-        league_rosters.clear()
         for team in team_list:
             league_rosters[team] = get_roster(league, team)
-        all_rosters[league] = league_rosters
+        all_rosters[league] = league_rosters.copy()
+        league_rosters.clear()
 
     check1 = time.time()
     dur = check1 - start
     print("Have all rosters. {:.2f} seconds".format(dur))
+
 
     all_rostered_players = []
     for league in all_rosters:
@@ -140,7 +141,7 @@ if __name__ == "__main__":
                 all_rostered_players.append(player)
 
 
-    """
+
     temp = all_rostered_players.copy()
     all_rostered_players.clear()
     for player in temp:
@@ -150,7 +151,7 @@ if __name__ == "__main__":
     check2 = time.time()
     dur = check2 - check1
     print("Removed duplicates. {:.2f} seconds".format(dur))
-    """
+
 
     print(len(all_rostered_players))
 
