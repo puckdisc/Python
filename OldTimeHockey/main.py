@@ -101,22 +101,16 @@ def get_roster(league_id, team_id):
     #return player_dict
 
 
+def get_rostered_players(leagues):
+    """
+    This function is used to build a list of all rostered players in the provided list of leagues.
+    Output is a csv file containing player_ids.
 
+    :param leagues: list of leagues to get rostered players
+    :return: .csv of rostered player_ids w/o duplicates
 
-
-
-
-
-if __name__ == "__main__":
-    start = time.time()
-
-
-
-    leagues = []
-    for x in range(12086, 12088):  # this will eventually become an argument list
-    #for x in range(12086, 12102):  # first and last league num for OTH 2019
-        leagues.append(x)
-
+    Future Improvements: include player name, use this as a id:name master list
+    """
 
 
     all_rosters = {}
@@ -189,3 +183,20 @@ if __name__ == "__main__":
     dur = end - start
     print("Total Elapsed Time: {:.2f} seconds".format(dur))
     # print(OTH_team_ids)
+
+
+
+
+if __name__ == "__main__":
+    start = time.time()
+
+
+
+    leagues = []
+    for x in range(12086, 12088):  # this will eventually become an argument list
+    #for x in range(12086, 12102):  # first and last league num for OTH 2019
+        leagues.append(x)
+
+    get_rostered_players(leagues)
+
+
