@@ -5,8 +5,12 @@ import csv
 def get_team_ids(league):
 
     """
+    This sub gets all team_ids for a given league.
+
     :param league: integer FF league_id
     :return: returns a list of team_ids in the passed league_id
+
+    Future Improvements: classes/subclasses to get more information from this view
     """
 
 
@@ -35,9 +39,12 @@ def get_team_ids(league):
 
 def get_roster(league_id, team_id):
     """
+    This function is used to get players rostered by a specific team
 
     :param: int league_id, int team_id
     :return: [player_ids]
+
+    Future Improvements: classes?, clean up code
     """
 
     params = {}
