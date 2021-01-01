@@ -1,5 +1,6 @@
 import time
 import requests
+import csv
 
 def get_team_ids(league):
 
@@ -109,7 +110,6 @@ def get_roster(league_id, team_id):
 if __name__ == "__main__":
     start = time.time()
 
-    f = open("test.txt", "w")
 
 
     leagues = []
@@ -153,7 +153,21 @@ if __name__ == "__main__":
     print("Removed duplicates. {:.2f} seconds".format(dur))
 
 
-    print(len(all_rostered_players))
+    fields = ['player_id']
+
+    rows = []
+    for player in all_rostered_players:
+        temp = [player]
+        rows.append(temp)
+
+    print(rows)
+
+
+    filename = "test_csv.csv"
+    with open(filename, 'w', newline='') as csvfile:
+        csvwriter = csv.writer(csvfile)
+        csvwriter.writerow(fields)
+        csvwriter.writerows(rows)
 
 
 
@@ -164,8 +178,6 @@ if __name__ == "__main__":
 
 
     """
-
-    
     for team in temp_all_rosters:
         a = temp_all_rosters[team]
         for player_id in a:
@@ -173,7 +185,6 @@ if __name__ == "__main__":
     """
 
 
-    f.close()
     end = time.time()
     dur = end - start
     print("Total Elapsed Time: {:.2f} seconds".format(dur))
