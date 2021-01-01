@@ -81,42 +81,22 @@ def get_roster(league_id, team_id):
             #temp = temp['id']
             roster.append(temp)
 
-    # print(roster)
-
-
-
-    """
-    temp_player_dict = {}
-    player_dict = {}
-    for z in position_slots:
-        for a in z:
-            try:
-                Player = a['leaguePlayer']
-            except KeyError:
-                continue
-            Player = Player['proPlayer']  # digging into nested dicts
-            temp_player_dict[Player['id']] = Player['nameFull']  # produces duplicate entries
-
-    for key, value in temp_player_dict.items():  # getting rid of duplicates
-        if key not in player_dict.keys():
-            player_dict[key] = value
-    """
-
     r.close()
     del r
     return roster
-    #return player_dict
+
 
 
 def get_rostered_players(leagues):
     """
-    This function is used to build a list of all rostered players in the provided list of leagues.
+    This function is used to record all rostered players in the provided list of leagues.
     Output is a csv file containing player_ids.
 
     :param leagues: list of leagues to get rostered players
     :return: .csv of rostered player_ids w/o duplicates
 
-    Future Improvements: include player name, use this as a id:name master list
+    Future Improvement: include player name, use this as a id:name master list
+    Future Improvement: include league and team as columns
     """
 
 
@@ -164,8 +144,8 @@ def get_rostered_players(leagues):
     print(rows)
 
 
-    filename = "test_csv.csv"
-    with open(filename, 'w', newline='') as csvfile:
+    filename = "rostered_players.csv"  # output data as csv
+    with open(filename, 'w', newline='') as csvfile:  # need newline param because windows
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(fields)
         csvwriter.writerows(rows)
