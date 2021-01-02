@@ -129,9 +129,9 @@ def get_rostered_players(leagues):
         if player not in all_rostered_players:
             all_rostered_players.append(player)
     del temp
-    check2 = time.time()
-    dur = check2 - check1
-    print("Removed duplicates. {:.2f} seconds".format(dur))
+    #check2 = time.time()
+    #dur = check2 - check1
+    #print("Removed duplicates. {:.2f} seconds".format(dur))
 
 
     fields = ['player_id']
@@ -140,8 +140,8 @@ def get_rostered_players(leagues):
     for player in all_rostered_players:
         temp = [player]
         rows.append(temp)
+    del temp
 
-    print(rows)
 
 
     filename = "rostered_players.csv"  # output data as csv
@@ -153,17 +153,8 @@ def get_rostered_players(leagues):
 
 
     #lap2 = time.time()
-   # dur = lap2 - start
+    #dur = lap2 - start
     #print("Have team ids. {:.2f} seconds".format(dur))
-
-
-
-    """
-    for team in temp_all_rosters:
-        a = temp_all_rosters[team]
-        for player_id in a:
-            f.write("Team: {:}, ID: {:}, Name: {:}".format(team, player_id, a[player_id] + "\n"))
-    """
 
 
     end = time.time()
