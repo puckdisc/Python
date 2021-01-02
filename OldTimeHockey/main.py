@@ -2,6 +2,7 @@ import time
 import requests
 import csv
 
+
 def get_team_ids(league):
 
     """
@@ -36,6 +37,7 @@ def get_team_ids(league):
     r.close()
     del r
     return team_ids
+
 
 def get_roster(league_id, team_id):
     """
@@ -83,7 +85,6 @@ def get_roster(league_id, team_id):
     return roster
 
 
-
 def get_rostered_players(leagues):
     """
     This function is used to record all rostered players in the provided list of leagues.
@@ -94,7 +95,7 @@ def get_rostered_players(leagues):
 
     Future Improvement: add league_id and rostered count (weighted?)
     """
-
+    start = time.time()
 
     all_rosters = {}  # builds a dict {league_id:{team_id:{player_id:player_name}}}
     league_rosters = {}
@@ -115,7 +116,6 @@ def get_rostered_players(leagues):
             for player_id, player_name in roster.items():
                 all_rostered[player_id] = player_name
 
-
     #check2 = time.time()
     #dur = check2 - check1
     #print("Removed duplicates. {:.2f} seconds".format(dur))
@@ -131,17 +131,11 @@ def get_rostered_players(leagues):
 
 
 
-    filename = "rostered_players.csv"  # output data as csv
+    filename = "rostered_players.csv"  # output data to csv
     with open(filename, 'w', newline='') as csvfile:  # need newline param because windows
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(fields)
         csvwriter.writerows(rows)
-
-
-
-    #lap2 = time.time()
-    #dur = lap2 - start
-    #print("Have team ids. {:.2f} seconds".format(dur))
 
 
     end = time.time()
@@ -150,20 +144,49 @@ def get_rostered_players(leagues):
     # print(OTH_team_ids)
 
 
+def get_draft_results(league):
+    params = {}
+    params['sport'] = 'NHL'
+    params['league_id'] = league
+    params['season'] = 2019
+    params['draft_number'] = 1
+
+
+    url = 'https://www.fleaflicker.com/api/FetchLeagueDraftBoard'
+
+    r = requests.get(url, params)  #FetchLeagueDraftBoard
+
+    r_json = r.json()  # json
+
+    draft_order = r_json['draftOrder']  # draft_order is list of teams, ws.flea.api.Team
+    draft_rows = r_json['rows']  # draft_rows is list of rows (aka rounds), ws.flea.api.DraftBoardRow
+
+    draft_results = {}  #returns {overall:name}
+    for row in draft_rows:  # draft rows is a list of wpi.DraftBoardCell, each row is a draft round
+        cells = row['cells']
+        for cell in cells:
+            draft_results[cell['slot']['overall']] = cell['player']['proPlayer']['nameFull']
+
+    for pick, player in draft_results.items():
+        print(pick, player)
+    r.close()
+    del r
 
 
 if __name__ == "__main__":
 
+    get_draft_results(12093)
 
 
+
+    """
     start = time.time()
     leagues = []
-    for x in range(12087, 12089):  # this will eventually become an argument list
-    #for x in range(12086, 12102):  # first and last league num for OTH 2019
+    for x in range(12086, 12102):  # first and last league num for OTH 2019
         leagues.append(x)
 
     get_rostered_players(leagues)
-    """
+
     start = time.time()
     print(get_roster(12086, 62757))
 
