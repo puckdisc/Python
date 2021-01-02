@@ -42,7 +42,7 @@ def get_roster(league_id, team_id):
     This function is used to get players rostered by a specific team
 
     :param: int league_id, int team_id
-    :return: [player_ids]
+    :return: {player_ids : player_names}
 
     Future Improvements: classes?, clean up code
     """
@@ -64,22 +64,19 @@ def get_roster(league_id, team_id):
     Bench_Slots = RosterGroup[1]['slots']
 
 
-    try:  # teams w/o IR players do not have an injured roster group
+    try:  # teams w/o IR players do not have roster group 'injured'
         Injured_Slots = RosterGroup[2]['slots']
         position_slots = [Starting_Slots, Bench_Slots, Injured_Slots]
     except IndexError:
         position_slots = [Starting_Slots, Bench_Slots]
 
-    roster = []
+    roster = {}
     for group in position_slots:
         for slot in group:
             try:
-                temp = slot['leaguePlayer']
-            except KeyError:
+                roster[slot['leaguePlayer']['proPlayer']['id']] = slot['leaguePlayer']['proPlayer']['nameFull']
+            except:  #except for empty roster slot
                 continue
-            temp = temp['proPlayer']['id']
-            #temp = temp['id']
-            roster.append(temp)
 
     r.close()
     del r
@@ -95,12 +92,11 @@ def get_rostered_players(leagues):
     :param leagues: list of leagues to get rostered players
     :return: .csv of rostered player_ids w/o duplicates
 
-    Future Improvement: include player name, use this as a id:name master list
-    Future Improvement: include league and team as columns
+    Future Improvement: add league_id and rostered count (weighted?)
     """
 
 
-    all_rosters = {}
+    all_rosters = {}  # builds a dict {league_id:{team_id:{player_id:player_name}}}
     league_rosters = {}
     for league in leagues:
         team_list = get_team_ids(league)
@@ -113,32 +109,23 @@ def get_rostered_players(leagues):
     dur = check1 - start
     print("Have all rosters. {:.2f} seconds".format(dur))
 
-
-    all_rostered_players = []
-    for league in all_rosters:
-        #print(league, all_rosters[league])
-        for roster in all_rosters[league].values():
-            for player in roster:
-                all_rostered_players.append(player)
+    all_rostered = {}  #builds dict {player_id:player_name} (i.e. removes duplicates)
+    for league, teams in all_rosters.items():
+        for team, roster in teams.items():
+            for player_id, player_name in roster.items():
+                all_rostered[player_id] = player_name
 
 
-
-    temp = all_rostered_players.copy()
-    all_rostered_players.clear()
-    for player in temp:
-        if player not in all_rostered_players:
-            all_rostered_players.append(player)
-    del temp
     #check2 = time.time()
     #dur = check2 - check1
     #print("Removed duplicates. {:.2f} seconds".format(dur))
 
 
-    fields = ['player_id']
+    fields = ['player_id', 'player_name']
 
     rows = []
-    for player in all_rostered_players:
-        temp = [player]
+    for player_id, player_name in all_rostered.items():
+        temp = [player_id, player_name]
         rows.append(temp)
     del temp
 
@@ -166,15 +153,22 @@ def get_rostered_players(leagues):
 
 
 if __name__ == "__main__":
+
+
+
     start = time.time()
-
-
-
     leagues = []
-    for x in range(12086, 12088):  # this will eventually become an argument list
+    for x in range(12087, 12089):  # this will eventually become an argument list
     #for x in range(12086, 12102):  # first and last league num for OTH 2019
         leagues.append(x)
 
     get_rostered_players(leagues)
+    """
+    start = time.time()
+    print(get_roster(12086, 62757))
 
+    end = time.time()
+    dur = end - start
+    print("{:.2f} seconds".format(dur))
+    """
 
